@@ -17,7 +17,8 @@
 
 // Includes
 #include <iostream>
-#include <stdio.h>
+#include <math.h>
+#include <string.h>
 
 // Local Includes.
 #include "./moon_ascii.h"
@@ -37,12 +38,24 @@ int main (int argc, char* argv[])
 		std::cout << "Usage: lunar <day> <month> <year>" << std::endl;
 		return 0;
 	}
+	bool southhemi = true;
+	if (argc > 4)
+	{
+		// Check if Northern Hemisphere flag.
+		if (strcmp(argv[4], "--north") == 0)
+		{
+			southhemi = false;
+		}	
+	}
+
+	// Get command line args.
 	int d = std::stoi(argv[1]);
 	int m = std::stoi(argv[2]);
 	int y = std::stoi(argv[3]);
 	
 	std::cout << "Approximate lunar phase for date " << d << "." << m << "." << y  << " :"<< std::endl;
 
+	// Calculate days since new moon from Julian day.
 	float jd = julian_day(y, m, d);
 	float diff = jd - nmoon;
 	float newmoons = diff / 29.530588853f;
@@ -51,21 +64,31 @@ int main (int argc, char* argv[])
 	
 	std::cout << daysincyc << " days since New Moon" << std::endl;
 
+	// Names of each phase.
 	const char* phases[] = {
 		"New Moon", "Waxing Crescent", "First Quarter", "Waxing Gibbous", 
 		"Full Moon", "Waning Gibbous", "Third Quarter", "Waning Crescent"
 	};
-	unsigned phase;
-	if (norm < 0.125f)      { phase = 0; }
-	else if (norm < 0.250f) { phase = 1; }
-	else if (norm < 0.375f) { phase = 2; }
-	else if (norm < 0.500f) { phase = 3; }
-	else if (norm < 0.625f) { phase = 4; }
-	else if (norm < 0.750f) { phase = 5; }
-	else if (norm < 0.875f) { phase = 6; }
-	else if (norm < 1.000f) { phase = 7; }
+
+	// Calculate phase index.
+	unsigned phase = (int)round(norm * 7.0f);
 	
+	// Print out the phase name.
 	std::cout << "The Moon phase is " << phases[phase] << std::endl;
+	
+	// Flip for Southern hemisphere.
+	if (southhemi)
+	{
+		phase = 8 - phase;
+		if (phase == 8) { phase = 0; }
+		std::cout << "The following would be visible from the Southern hemisphere:";
+	}
+	else 
+	{
+		std::cout << "The following would be visible from the Northern hemisphere:";
+	}
+
+	// Print ASCII
 	std::cout << ascii_art_phases[phase]  << std::endl;
 
 	return 0;
