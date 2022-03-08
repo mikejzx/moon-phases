@@ -1,12 +1,10 @@
+#ifndef MOON_ASCII_H
+#define MOON_ASCII_H
 
-/*
-	Some ASCII art that is shown for each phase.
-*/
-
-const char* ascii_art_phases[] = 
+static const char *MOON_PHASE_ART[MOON_PHASE_COUNT] =
 {
 // New Moon
-R"(
+[NEW_MOON] = R"(
    _..._
  .'     '.
 /         \
@@ -16,7 +14,7 @@ R"(
     ```
 )",
 // Waxing Crescent
-R"(
+[WAXING_CRESCENT] = R"(
    _..._
    `'-.-'.
        \--\
@@ -26,7 +24,7 @@ R"(
     ```
 )",
 // First Quarter
-R"(
+[FIRST_QUARTER] = R"(
       ._
      |--'.
     /-----\
@@ -35,8 +33,8 @@ R"(
   '_---_.'
     ```
 )",
-// "Waxing Gibbous"
-R"(
+// Waxing Gibbous
+[WAXING_GIBBOUS] = R"(
     ..._
    /----'.
   /-------\
@@ -46,7 +44,7 @@ R"(
     ```
 )",
 // Full Moon
-R"(
+[FULL_MOON] = R"(
    _..._
  .'-----'.
 /---------\
@@ -56,7 +54,7 @@ R"(
     ```
 )",
 // Waning Gibbous
-R"(
+[WANING_GIBBOUS] = R"(
    _...
  .'----\
 /-------\
@@ -66,7 +64,7 @@ R"(
     ```
 )",
 // Last Quarter
-R"(
+[THIRD_QUARTER] = R"(
    _.
  .'--|
 /-----\
@@ -76,7 +74,7 @@ R"(
     ```
 )",
 // Waning Crescent
-R"(
+[WANING_CRESCENT] = R"(
    _..._
  .'-.-'`
 /--/
@@ -86,3 +84,5 @@ R"(
     ```
 )"
 };
+
+#endif

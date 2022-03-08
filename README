@@ -1,0 +1,5 @@
+lunar
+=====
+Finds the phase of the moon on the given date.  Displays ASCII art to represent
+current phase as viewed from the Southern Hemisphere.  Pass --north to get view
+from Northern Hemisphere
