@@ -72,7 +72,7 @@ int
 main(int argc, char **argv)
 {
     // New moon on this day
-    struct date_time_info nmoon_t =
+    static const struct date_time_info nmoon_t =
     {
         .y = 2000, .m = 1, .d = 6
     };
@@ -132,9 +132,9 @@ main(int argc, char **argv)
     // Get lunar phase
     double jd = julian_day(&t);
     double diff = jd - nmoon;
-	double newmoons = diff / 29.530588853f;
-	double norm = newmoons - (int)newmoons;
-	double days_in_cycle = norm * 29.530588853f;
+    double newmoons = diff / 29.530588853f;
+    double norm = newmoons - (int)newmoons;
+    double days_in_cycle = norm * 29.530588853f;
 
     printf("%.1f days since new-moon\n", days_in_cycle);
 
