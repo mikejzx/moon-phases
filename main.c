@@ -46,7 +46,7 @@ static const char *MOON_PHASE_NAMES[] =
 };
 
 inline const double
-julian_day(struct date_time_info *t)
+julian_day(const struct date_time_info *t)
 {
     int y = t->y;
     int m = t->m;
